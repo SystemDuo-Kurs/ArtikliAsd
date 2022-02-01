@@ -22,5 +22,18 @@ namespace ArtikliAsd
 
         public int _porezProc;
         public decimal _izlaznaPorez;
+
+        public string Stampaj()
+        {
+            return $"{_sifra} -- {_naziv} - {_kolicina} - {_ulazna} - " +
+                $"{_marzaProc}% - {_porezProc}% - {_izlazna} - {_izlaznaPorez}";
+        }
+
+        public string ZaFajl()
+        {
+            return $"{_sifra}|{_naziv}|{_kolicina}|{_ulazna}|" +
+                $"{_marzaProc}|{_porezProc}|{_izlazna}|{_izlaznaPorez}" +
+                Environment.NewLine;
+        }
     }
 }
