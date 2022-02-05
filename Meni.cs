@@ -1,6 +1,6 @@
 ﻿using ArtikliAsd;
 
-public static class MeniSistem
+public static partial class MeniSistem
 {
     public static void Meni()
     {
@@ -29,68 +29,6 @@ public static class MeniSistem
             }
             Console.Clear();
         } while (true);
-    }
-
-    public static void NoviRacun()
-    {
-        Racun r = new();
-        do
-        {
-            Console.Write("Unesite sifru artikla: ");
-            string sifra = Console.ReadLine();
-            Artikal a = Artikal._artikli.
-                Where(art => art._sifra == sifra).
-                FirstOrDefault();
-            if (a is null)
-            {
-                Console.WriteLine("Sifra jok");
-                Console.ReadKey();
-                Console.Clear();
-                continue;
-            }
-
-            Console.Write("Kolicina: ");
-            int kol = int.Parse(Console.ReadLine());
-            if (kol > 0 && kol <= a._kolicina)
-            {
-                r._artikli.Add(a, kol);
-                a._kolicina -= kol;
-                Console.WriteLine("=====================");
-                r._artikli.Keys.ToList().ForEach(kljuc =>
-                    Console.WriteLine($"{kljuc._naziv}      {r._artikli[kljuc]}" +
-                    $"    {kljuc._izlaznaPorez * r._artikli[kljuc]}"));
-                Console.WriteLine("=====================");
-                Console.Write("Jos? (d/n) ");
-                if (Console.ReadLine() == "n")
-                    break;
-            }
-        } while (true);
-        r._vremeIzdavanja = DateTime.Now;
-        r._rbr = Racun._racuni.Count + 1;
-        //Treba izracunati total
-        Racun._racuni.Add(r);
-    }
-
-    public static void MeniRacuni()
-    {
-        Console.Clear();
-        Console.WriteLine("1. Novi racun");
-        Console.WriteLine("2. Prikaz");
-        Console.WriteLine("3. Nazad");
-        Console.Write("Izbor: ");
-        string unos = Console.ReadLine();
-        switch (unos)
-        {
-            case "1":
-                NoviRacun();
-                break;
-
-            case "2":
-                break;
-
-            case "3":
-                return;
-        }
     }
 
     public static void Popis()
